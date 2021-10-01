@@ -17,7 +17,14 @@ node {
     println SFDC_HOST
     println CONNECTED_APP_CONSUMER_KEY
     def toolbelt = tool 'toolbelt'
-
+    parameters { 
+        string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '')
+        text(name: 'DEPLOY_TEXT', defaultValue: 'One\nTwo\nThree\n', description: '')
+        booleanParam(name: 'DEBUG_BUILD', defaultValue: true, description: '')
+        choice(name: 'CHOICES', choices: ['one', 'two', 'three'], description: '')
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'A secret password')
+    }
+    
     stage('checkout source') {
         // when running in multi-branch job, one must issue this command
         checkout scm
